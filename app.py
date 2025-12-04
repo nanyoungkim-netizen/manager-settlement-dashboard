@@ -79,6 +79,8 @@ def get_settlements():
 
         return jsonify(results)
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/manager/<int:manager_id>/matches')

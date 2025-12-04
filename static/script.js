@@ -58,9 +58,12 @@ order by T3.name;`;
 
         try {
             const response = await fetch(`/api/settlements?start_date=${start}&end_date=${end}`);
+
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Network response was not ok');
             }
+
             const data = await response.json();
             renderTable(data);
         } catch (error) {
